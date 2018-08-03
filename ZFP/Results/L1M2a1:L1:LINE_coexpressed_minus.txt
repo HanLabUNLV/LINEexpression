@@ -1,0 +1,2 @@
+rep(cancerdir, nrow(sigminus))	genenames	fixed_generatio	bestmodelnames	generatio_coef	generatio_pval	generatio_qval	partialeta2
+KICHKIRCKIRP	ZSCAN21|7589	1	mod3	-1.09827400748069	7.12477695753795e-10	2.62191792037396e-07	0.268462850222297

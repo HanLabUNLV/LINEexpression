@@ -1,0 +1,2 @@
+rep(cancerdir, nrow(sigminus))	genenames	fixed_generatio	bestmodelnames	generatio_coef	generatio_pval	generatio_qval	partialeta2
+ESCASTAD	ZNF215|7762	1	mod2	-0.591889357391018	4.85160019016291e-07	2.36988362097698e-05	0.464623761847388

@@ -1,0 +1,2 @@
+rep(cancerdir, nrow(sigplus))	genenames	fixed_generatio	bestmodelnames	generatio_coef	generatio_pval	generatio_qval	partialeta2
+ESCASTAD	ZIM3|114026	1	mod3	1.30361106228584	3.25267263072283e-09	1.196983528106e-06	0.587637276798929
