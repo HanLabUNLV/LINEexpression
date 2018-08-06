@@ -7,7 +7,7 @@ library(matrixStats)
 
 generatio <- function(genename)
 {
-  normalfname <- paste("/home/mirahan/Work/TE-pre/L1HSstats.DEGES/GDC/VSTcnts.normal/", genename, ".txt", sep="")
+  normalfname <- paste("/home/mirahan/Work/TE-pre/L1HSstats/GDC/VSTcnts.normal/", genename, ".txt", sep="")
   
   if (file.info(normalfname)$size == 0) {
     print ("file size zero")
@@ -23,17 +23,17 @@ generatio <- function(genename)
 }
 
 
-setwd("/home/mirahan/Work/TE-pre/L1HSstats.DEGES/")
+setwd("/home/mirahan/Work/TE-pre/L1HSstats/")
 
-L1HS <- read.table("/home/mirahan/Work/TE-pre/L1HSstats.DEGES/L1HS.VST.txt", sep="\t", header=TRUE, row.names=1)
+L1HS <- read.table("/home/mirahan/Work/TE-pre/L1HSstats/L1HS.VST.txt", sep="\t", header=TRUE, row.names=1)
 L1HS <- L1HS[L1HS$condition=="normal",]
 colnames(L1HS)[7:8] <-c("L1HSnRPM", "L1HS_n")
 
-log2TPMsum <- read.table(file="/home/mirahan/Work/TE-pre/L1HSstats.DEGES/log2colsums.txt", sep="\t", header = TRUE, row.names=1)
+log2TPMsum <- read.table(file="/home/mirahan/Work/TE-pre/L1HSstats/log2colsums.txt", sep="\t", header = TRUE, row.names=1)
 log2TPMsum <- cbind(substr(rownames(log2TPMsum), 1, 4), log2TPMsum)
 colnames(log2TPMsum) <- c("patient", "log2TPMsum")
 
-oldLINEVST <- read.table(file="/home/mirahan/Work/TE-pre/L1HSstats.DEGES/LINE.old.VSTcnt.txt", sep="\t", header = TRUE, row.names=1)
+oldLINEVST <- read.table(file="/home/mirahan/Work/TE-pre/L1HSstats/LINE.old.VSTcnt.txt", sep="\t", header = TRUE, row.names=1)
 oldLINEVST <- cbind.data.frame(rownames(oldLINEVST), oldLINEVST)
 colnames(oldLINEVST) <- c("patient", "oldLINEVST")
 
@@ -42,12 +42,13 @@ file.names.nchar <- sapply(file.names, nchar)
 genenames <- substr(file.names, 1, file.names.nchar-4)
 genenames <- unique(genenames)
 
-cancertypes = list("BLCA", "BRCA", "CHOL", c("COAD", "READ"), c("ESCA", "STAD"), "HNSC", "KICH", "KIRC", "KIRP", "LIHC", "LUAD", "LUSC", "PRAD", "THCA", "UCEC")
+#cancertypes = list("BLCA", "BRCA", "CHOL", c("COAD", "READ"), c("ESCA", "STAD"), "HNSC", "KICH", "KIRC", "KIRP", "LIHC", "LUAD", "LUSC", "PRAD", "THCA", "UCEC")
+cancertypes = list("BLCA", "BRCA", c("CHOL", "LIHC"), c("COAD", "READ"), c("ESCA", "STAD"), "HNSC", c("KICH", "KIRC", "KIRP"), c("LUAD", "LUSC"), "PRAD", "THCA", "UCEC")
 cancerdirs = unlist(lapply(cancertypes, paste, collapse=""))
 newdirs = paste("results.oldLINEcov", cancerdirs, sep="/")
 sapply(newdirs, dir.create)
 
-THCAradiation = read.table(file="/home/mirahan/Work/TE-pre/L1HSstats.DEGES/THCA_expressionandradiation.txt", sep="\t", header=TRUE)
+THCAradiation = read.table(file="/home/mirahan/Work/TE-pre/L1HSstats/THCA_expressionandradiation.txt", sep="\t", header=TRUE)
 
 
 for (j in 1:length(cancertypes)) {
@@ -90,7 +91,7 @@ for (j in 1:length(cancertypes)) {
     }
     subdata$nested.batch = factor(subdata$nested.batch)
     dataratio <- subdata    
-    
+  
     test<-cor.test(dataratio$gene_n,dataratio$L1HS_n, method="pearson")
     pearson_r[i] <- test$estimate
     pearson_pval[i] <- test$p.value
@@ -214,8 +215,8 @@ for (j in 1:length(cancertypes)) {
     pluscoef <- eval[eval$generatio_coef>0,]
     dim(minuscoef)
     dim(pluscoef)
-    sigplus <- pluscoef[pluscoef$generatio_qval<0.0001,]
-    sigminus <- minuscoef[minuscoef$generatio_qval<0.0001,]
+    sigplus <- pluscoef[pluscoef$generatio_qval<0.00001,]
+    sigminus <- minuscoef[minuscoef$generatio_qval<0.00001,]
     coexpressed_plus = rbind.data.frame(coexpressed_plus, cbind.data.frame(rep(cancerdir, nrow(sigplus)), sigplus))
     coexpressed_minus = rbind.data.frame(coexpressed_minus, cbind.data.frame(rep(cancerdir, nrow(sigminus)), sigminus))
   }

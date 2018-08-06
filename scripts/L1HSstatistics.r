@@ -353,8 +353,8 @@ pheatmap(matrix,
     for (j in (i+1):length(typelist)) {
       resfilename = paste0("resNew.LRT.", i, ".", j, ".RData")
       pdffilename = paste0("MAplot.", typelist[i], ".", typelist[j], ".pdf")
-      if (file.exists(resfilename)) {
-        load(resfilename)
+      if (file.exists(paste("resNew", resfilename, sep="/"))) {
+        load(paste("resNew", resfilename, sep="/"))
         pdf(pdffilename)
         plotMA(res)
         dev.off()
