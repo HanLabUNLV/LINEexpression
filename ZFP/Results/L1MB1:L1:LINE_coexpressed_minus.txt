@@ -1,3 +1,0 @@
-rep(cancerdir, nrow(sigminus))	genenames	fixed_generatio	bestmodelnames	generatio_coef	generatio_pval	generatio_qval	partialeta2
-PRAD	ZNF689|115509	1	mod3	-0.819315394644268	1.77395758325062e-10	3.26408195318113e-08	0.575217296976231
-PRAD	ZKSCAN3|80317	1	mod3	-0.924936593435967	7.88653338528728e-07	9.67414761928573e-05	0.401373571390234

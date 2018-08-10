@@ -1,2 +1,0 @@
-rep(cancerdir, nrow(sigminus))	genenames	fixed_generatio	bestmodelnames	generatio_coef	generatio_pval	generatio_qval	partialeta2
-BRCA	ZNF511|118472	1	mod3	-0.708678440584787	1.27694081200523e-06	9.78987955870678e-06	0.223969572996422

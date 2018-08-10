@@ -1,1 +1,0 @@
-rep(cancerdir, nrow(sigplus))	genenames	fixed_generatio	bestmodelnames	generatio_coef	generatio_pval	generatio_qval	partialeta2
